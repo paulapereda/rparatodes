@@ -34,42 +34,22 @@ Además:
 
 - acrónimo de Integrated Development Environment (Entorno de Desarrollo Integrado) $\rightarrow$ RStudio es una aplicación que nos entrega herramientas para hacer más fácil el desarrollo de proyectos usando R.
 
-Si quedó todo bien instalado, cuando abras RStudio deberías ver algo así:
+Se ve más o menos así:
 
-![](images/rstudio.png)
+.center[
+<img src="images/rstudio.png" width="600">]
 ---
 #Utilización de R
 
-Si solo abrís R en tu computador, lo que verás es una consola. Cuando trabajamos en ella escribimos directamente el código que queremos que se ejecute. El signo $>$ nos indica que R está listo y esperando que escribamos algo.
-
-![](images/r_consola.png)
+.center[
+<img src="images/rstudio_2.png" width="700">]
 ---
 
-#Paneles: files
+Si solo abrís R en la PC, lo que verás es una consola. Cuando trabajamos en ella escribimos directamente el código que queremos que se ejecute. El signo $>$ nos indica que R está listo y esperando que escribamos algo.
 
-Muestra el directorio (la carpeta) en la que te encuentras actualmente. 
+.center[
+<img src="images/r_consola.png" width="400">]
 
-![](images/rstudio_files.png)
-
----
-
-#Paneles: plots
-
-Lugar donde aparecerán los gráficos que vayas creando. No hemos hecho ninguno por ahora, así que este panel también está vacío.
-
-![](images/rstudio_plots.png)
----
-
-#Paneles: workspace
-
-      1) el historial de funciones que hemos ejecutado (History)
-      2) la opción para generar conexiones a bases de datos externas 
-      (Connections)
-      3) el Environment. Este último panel es muy importante y entender
-      lo que nos muestra es fundamental para comprender cómo funciona R
-      
-      
-![](images/rstudio_globalenvironment.png)
 
 ---
 
@@ -79,7 +59,9 @@ En R existen cinco tipos de datos básicos:
 
 1) Vector, 2) Matriz, 3) Factor, 4) Data frame, 5) Lista
 
-![](images/data-estructure.png)
+.center[
+<img src="images/data-estructure.png" width="400">]
+
 ---
 
 #Vectores
@@ -128,8 +110,9 @@ Mis ganancias de poker por día de la semana son:
 poker_gan <- c(150, 178, -6, 166, -80, -119, -142)
 poker_gan
 ```
+---
 
-Nombres de vectores
+#Nombres de vectores
 La función names() nos permite nombrar los elementos de cada vector.
 
 Por ejemplo, a cada elemento de las ganancias de poker del ejercicio anterior, asignaremos el nombre del día de la semana en que se obtuvieron.
@@ -153,21 +136,20 @@ Estas posiciones pueden indicarse por medio de un vector numérico o de caracter
 poker_gan[ c(1, 5) ]
 ```
 
-La función seq() o el uso de dos puntos : permiten crear un vector de secuencias numéricas:
+El uso de dos puntos: permiten crear un vector de secuencias numéricas:
 
 ```{r}
 poker_gan[ 1:3 ]
 ```
-
-
-Nombres:
+---
+- Nombres:
 
 ```{r}
 poker_gan[ c("Mon", "Tue")]
 ```
 
 ---
-# ¿Qué pasa si sumamos los días de fin de semana?
+# Operaciones con vectores
 
 
 ```{r}
@@ -182,9 +164,9 @@ En R para cualquier operación (+, -, *, /) de vectores, las operaciones son ele
 
 Por ejemplo, al sumar vectores:
 
-la primera posición del primer vector se suma con la primera posicion del segundo vector,
+la primera posición del primer vector se suma con la primera posición del segundo vector,
 
-la segunda posición del primer vector se suma con la segunda posicion del segundo vector
+la segunda posición del primer vector se suma con la segunda posición del segundo vector
 
 y así sucesivamente.
 
@@ -193,12 +175,12 @@ y así sucesivamente.
 #Comparación de elementos
 La comparación de elementos se realiza con los siguientes comandos:
 
-- > mayor a
-- >= mayor o igual
-- < menor a
-- <= menor o igual a
-- == igual a
-- != distinto de
+- $>$ mayor a
+- $>=$ mayor o igual
+- $<$ menor a
+- $<=$ menor o igual a
+- $==$ igual a
+- $!=$ distinto de
 - %in% contenido en
 Este tipo de operaciones regresan un vector lógico dependiendo si la condición se cumple o no.
 
@@ -222,8 +204,10 @@ matrix(data = 1:9, nrow = 3, ncol = 3)
 ```
 
 En el siguiente vector se presentan los ingresos totales y de lanzamiento de cada película de la saga Harry Potter.
+---
 
-Box Office Mojo: Harry Potter
+# Ejemplo: Box Office Mojo: Harry Potter
+
 ```{r}
 sales_hp <- c(497066400, 426630300, 401608200, 399302200, 377314200, 
               359788300, 357233500, 328833900, 141823200, 189432500, 
@@ -252,9 +236,7 @@ ncol(sales_mat)
 ---
  
 #Nombres de matrices
-En R es posible agregar nombres a los renglones y columnas de una matriz con las funciones colnames() y rownames().
-
-Considerando los siete títulos de la saga, asignamos los títulos de las películas a los renglones con la función rownames():
+En R es posible agregar nombres a los renglones y columnas de una matriz con las funciones colnames() y rownames(). Considerando los siete títulos de la saga, asignamos los títulos de las películas a los renglones con la función rownames():
 
 ```{r}
 titles_hp <- c(
@@ -318,7 +300,7 @@ Un factor en R es un tipo de vector con un enfoque estadístico que se usa para 
 - Existen dos tipos de variables categóricas: nominal u ordinal. En R un factor también se puden definir de esta forma.
 
 ---
-Variable categórica nominal
+#Variable categórica nominal
 Un ejemplo de variable categórica nominal es el sexo de una persona: femenino (F) o masculino (M)
 
 En R un factor se define con la función factor().
@@ -336,7 +318,7 @@ sex_lev_fct
 ```
 
 ---
-Variable categórica ordinal
+#Variable categórica ordinal
 
 Una variable categórica ordinal como el nombre lo dice tiene orden en los niveles del factor.
 
@@ -368,13 +350,14 @@ temp_fct
 ---
 
 #Dataframe
-Un dataframe es un objeto de dos dimensiones en R. Puede verse como un arreglo de vectores de la misma dimensión, similar a una matriz.
 
-La ventaja de un dataframe, es que a diferencia de una matriz, los vectores o columnas pueden ser de diferentes tipos.
-En general, funcionan para guardar tablas de datos. Donde las columnas representan variables y los renglones observaciones. Es similar a la carga de datos en paquetes estadísticos como SAS y SPSS.
+- Un dataframe es un objeto de dos dimensiones en R. Puede verse como un arreglo de vectores de la misma dimensión, similar a una matriz.
 
+- La ventaja de un dataframe, es que a diferencia de una matriz, los vectores o columnas pueden ser de diferentes tipos.
 
-En R se crean dataframes con la función data.frame().
+Puedo crear dataframes con la función data.frame().
+
+---
 
 Una forma de crear un dataframe es asignando vectores.
 
@@ -385,6 +368,8 @@ muestra_df <- data.frame(secuencia = 1:5,
 muestra_df
 ```
 
+---
+
 O bien, se pude transformar una matriz con la misma función. Tomemos los datos de los ingresos de las películas de la saga de HP y hagamos una matriz.
 
 ```{r}
@@ -392,6 +377,7 @@ sales_df <- data.frame(sales_mat)
 sales_df
 ```
 ---
+
 # Nombres de dimensiones
 Al igual que matrices, las funciones rownames() y colnames() permiten nombrar los renglones y columnas del objeto.
 
@@ -400,41 +386,61 @@ colnames(sales_df) <- c("total_grosses", "opening_grosses")
 sales_df
 ```
 ---
-# Seleccion de elementos
+# Selección de elementos
 Para dataframes, ademas de seleccionar posiciones de renglones y columnas con [ , ], se puede usar el signo $.
 
 ```{r}
 sales_df$total_grosses
 ```
 
-Usando este mismo signo se pueden agregar nuevas columnas al objeto.
-
-Por ejemplo, tomemos los títulos que se heredaron de la matriz como nombres de columnas. Incluyamos una variable al dataframe de los títulos como un factor.
-
-```{r}
-sales_df$title <- factor(rownames(sales_df))
-sales_df
-```
 
 ---
 #Funciones útiles para data frames
 Existen algunas que ayudan a tratar dataframes.
 
-head() y tail():
+head():
 ```{r}
 head(sales_df)
-tail(sales_df)
 ```
 
 str()
 ```{r}
 str(sales_df)
 ```
+---
 
 dim(), nrow() y ncol()
 ```{r}
 dim(sales_df)
 nrow(sales_df)
 ncol(sales_df)
+```
+
+---
+
+#Ejemplo: 
+
+```{r}
+datos <- read.csv('data/datos.csv')
+
+str(datos)
+```
+
+---
+
+```{r}
+head(datos)
+```
+
+---
+
+```{r}
+table(datos$continente)
+```
+
+---
+
+```{r}
+plot(datos$esperanza_vida, datos$pbi_per_capita)
 ```
 
