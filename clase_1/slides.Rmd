@@ -1,5 +1,5 @@
 ---
-title: "rparatodes 💃"
+title: "intro_r 💃🏾"
 author: "Pau"
 date: "30/08/2018"
 output:
@@ -38,6 +38,20 @@ Se ve más o menos así:
 
 .center[
 <img src="images/rstudio.png" width="600">]
+---
+#Instalación R
+Para poder instalar R y RStudio, se siguenn los siguientes pasos:
+
+    - Descargan R desde https://cran.r-project.org/. Eligen la opción que corresponda,
+    según su sistema operativo.
+     
+    - Instalen R en su PC, como cualquier programa.
+    
+    - Una vez que R ha quedado correctamente instalado, descarguen RStudio desde                 https://www.rstudio.com/products/rstudio/download/. Eligen la primera 
+    opción, es decir, "RStudio Desktop Open Source License" (gratis).
+    
+    - Instalan RStudio en su PC,  como cualquier programa.
+
 ---
 #Utilización de R
 
