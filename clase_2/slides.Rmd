@@ -15,13 +15,33 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
+library(tidyverse)
 ```
 
-# Conceto clave: %>%
+# **¿Qué es tidy?**
+
+```{r, eval = FALSE}
+install.packages('tidyverse') # ¡solo se hace una vez!
+library(tidyverse)
+```
+
+3 reglas para datos $tidy$:
+
+    1) cada variable tiene su propia columna
+    2) cada observación tiene su propia fila
+    3) cada valor tiene su propia celda
+    
+  .center[
+<img src="images/tidy.png" width="600">]  
+---
+
+# **Concepto clave: %>%**
 
 El operador %>% funciona así:
 
 f(x) es igual a x %>% f()
+
+Se lee como entonces o después $\rightarrow$ permite leer de izquierda a derecha:
 
 ```{r, eval = FALSE}
 mis_datos %>% 
@@ -30,5 +50,277 @@ mis_datos %>%
   y_una_mas()
 ```
 
+```{r, eval = FALSE}
+resultado <- mis_datos %>% 
+  hace_esta_cosa() %>% 
+  ahora_esta_otra() %>% 
+  y_una_mas()
+```
 
 ---
+# **datos ejemplo: planeta feliz**
+
+```{r}
+datos <- read.csv("http://www.lock5stat.com/datasets/HappyPlanetIndex.csv")
+str(datos)
+```
+
+---
+
+Los datos tienen 11 variables:
+
+  - Region: 1 = Latin America, 2 = Western nations, 3 = Middle East, 4 = Sub-Saharan Africa, 5 = South Asia, 6 = East Asia, 7 = former Communist countries
+  - Happiness Scored on a 0-10 scale for average level of happiness (10 is happiest)
+  - LifeExpectancy Average life expectancy (in years)
+  - Footprint Ecological footprint - a measure of the (per capita) ecological impact
+  - HLY Happy Life Years - combines life expectancy with well-being
+  - HPI Happy Planet Index (0-100 scale)
+  - HPIRank HPI rank for the country
+  - GDPperCapita Gross Domestic Product (per capita)
+  - HDI Human Development Index
+  - Population Population (in millions)
+
+---
+# **ordenando variables: arrange**
+
+```{r, eval = FALSE}
+mis_datos %>% arrange(variable)
+```
+
+Orden descendiente:
+
+```{r, eval = FALSE}
+mis_datos %>% arrange(-variable)
+
+mis_datos %>% arrange(desc(variable))
+```
+
+Para ordenar una variable y luego, la otra:
+
+
+```{r, eval = FALSE}
+mis_datos %>% arrange(variable_1, variable_2)
+```
+---
+# **ejemplo: arrange**
+
+```{r, results = 'hide'}
+asc <- datos %>% 
+  arrange(Region)
+```
+
+```{r, echo = FALSE}
+head(asc)
+```
+
+---
+```{r, results = 'hide'}
+desc <- datos %>% 
+  arrange(-Region)
+```
+
+```{r, echo = FALSE}
+head(desc)
+```
+
+---
+# **escogiendo variables: select**
+
+Se queda con todas las filas pero retiene solo algunas variables (columnas)
+
+```{r, eval = FALSE}
+
+my_data %>% 
+    select(VARIABLE1, VARIABLE2)
+```
+
+Elimina variables:
+
+```{r, eval = FALSE}
+
+my_data %>% 
+    select(-variable_1, -variable_2)
+```
+
+---
+# **ejemplo: select**
+
+```{r, results = 'hide'}
+feliz_chico <- datos %>%
+  select(Country, Region, Happiness)
+```
+
+```{r, echo = FALSE}
+head(feliz_chico)
+```
+
+---
+# **enfocándonos en ciertos casos: filter**
+
+```{r, eval = FALSE}
+mis_datos %>% filter(una_expresion_logica)
+```
+
+Que se cumplan dos condiciones:
+
+```{r, eval = FALSE}
+mis_datos %>% filter(una_expresion_logica & otra_expresion_logica)
+```
+
+Que se cumpla una u otra condición:
+
+```{r, eval = FALSE}
+mis_datos %>% filter(una_expresion_logica | otra_expresion_logica)
+```
+---
+# **ejemplo: filter**
+
+```{r, results = 'hide'}
+feliz2 <- datos %>%
+  filter(Region == 2)
+
+```
+
+```{r, echo = FALSE}
+head(feliz2)
+```
+---
+
+```{r, results = 'hide'}
+feliz3 <- datos %>%
+   filter(Happiness > 7)
+
+```
+
+
+```{r, echo = FALSE}
+head(feliz3)
+```
+---
+
+# **arrange, filter & select**
+
+Recordatorio: arrange, filter & select no alteran el dataset original (mis_datos)
+
+```{r, eval = FALSE}
+nuevos_datos <- viejos_datos %>%
+    filter(algunas_filas) %>% 
+    select(algunas_columnas) %>% 
+    arrange(por_variable)
+```
+
+Para alterar el dataset original:
+
+```{r, eval = FALSE}
+viejos_datos <- viejos_datos %>%
+    filter(algunas_filas) %>% 
+    select(algunas_columnas) %>% 
+    arrange(por_variable)
+```
+
+---
+# **creando nuevas variables: mutate**
+
+```{r, eval = FALSE}
+mis_datos <- mis_datos %>%
+    mutate(variable = expresión)
+```
+
+---
+# **ejemplo: mutate**
+
+```{r, results = 'hide'}
+feliz <- datos %>%
+  mutate(TotalGDP = GDPperCapita * Population )
+```
+
+```{r, echo = FALSE}
+head(feliz)
+```
+
+---
+# **renombrando variables: rename**
+
+```{r, eval = FALSE}
+mis_datos <- mis_datos %>%
+    rename(nuevo_nombre = viejo_nombre)
+```
+
+---
+# **ejemplo: rename**
+
+```{r, results = 'hide'}
+datos_es <- datos %>%
+  rename(pais = Country,
+         felicidad = Happiness)
+```
+
+```{r, echo = FALSE}
+head(datos_es)
+```
+
+---
+# **resúmenes agrupados: group & summarise**
+
+```{r, eval = FALSE}
+resumen <- mis_datos %>% 
+  group_by(variable_para_agrupar) %>% 
+  summarise(
+    mediana = median(variable),
+    media = mean(variable),
+    des_est = sd(variable))
+
+resumen
+```
+
+```{r, eval = FALSE}
+resumen <- mis_datos %>% 
+  group_by(variable_para_agrupar) %>% 
+  summarise(
+    mediana = median(variable, na.rm = T),
+    media = mean(variable, na.rm = T),
+    des_est = sd(variable, na.rm = T))
+
+resumen
+```
+
+---
+
+```{r, eval = FALSE}
+resumen <- mis_datos %>% 
+  group_by(variable_para_agrupar) %>% 
+  summarise(cuenta = n())
+
+resumen
+```
+---
+
+# **ejemplo: group & summarise**
+
+```{r, results = 'hide'}
+resumen <- datos %>%
+  group_by(Region) %>%
+  summarise(AverageHappy = mean(Happiness))
+```
+
+```{r, echo = FALSE}
+head(resumen)
+```
+
+---
+# **en resumen...**
+
+    1) %>%: agiliza el flujo de trabajo
+    
+    2) arrange: ordena variables
+
+    3) select: elige variables
+    
+    4) filter: elige filas
+    
+    5) mutate: crear nuevas variables
+    
+    6) rename: renombra variables
+    
+    7) group_by and summarize: crea resúmenes agrupados
+    

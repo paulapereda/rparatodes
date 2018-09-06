@@ -8,15 +8,6 @@
     <link href="libs/remark-css/default.css" rel="stylesheet" />
     <link href="libs/remark-css/rladies.css" rel="stylesheet" />
     <link href="libs/remark-css/rladies-fonts.css" rel="stylesheet" />
-    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
-    <script src="libs/jquery/jquery.min.js"></script>
-    <link href="libs/leaflet/leaflet.css" rel="stylesheet" />
-    <script src="libs/leaflet/leaflet.js"></script>
-    <link href="libs/leafletfix/leafletfix.css" rel="stylesheet" />
-    <script src="libs/Proj4Leaflet/proj4-compressed.js"></script>
-    <script src="libs/Proj4Leaflet/proj4leaflet.js"></script>
-    <link href="libs/rstudio_leaflet/rstudio_leaflet.css" rel="stylesheet" />
-    <script src="libs/leaflet-binding/leaflet.js"></script>
   </head>
   <body>
     <textarea id="source">
@@ -32,11 +23,31 @@ class: center, middle, inverse, title-slide
 
 
 
-# Conceto clave: %&gt;%
+# **¿Qué es tidy?**
+
+
+```r
+install.packages('tidyverse') # ¡solo se hace una vez!
+library(tidyverse)
+```
+
+3 reglas para datos `\(tidy\)`:
+
+    1) cada variable tiene su propia columna
+    2) cada observación tiene su propia fila
+    3) cada valor tiene su propia celda
+    
+  .center[
+&lt;img src="images/tidy.png" width="600"&gt;]  
+---
+
+# **Concepto clave: %&gt;%**
 
 El operador %&gt;% funciona así:
 
 f(x) es igual a x %&gt;% f()
+
+Se lee como entonces o después `\(\rightarrow\)` permite leer de izquierda a derecha:
 
 
 ```r
@@ -47,630 +58,412 @@ mis_datos %&gt;%
 ```
 
 
+```r
+resultado &lt;- mis_datos %&gt;% 
+  hace_esta_cosa() %&gt;% 
+  ahora_esta_otra() %&gt;% 
+  y_una_mas()
+```
+
 ---
-
-# Get Started
-
----
-
-# Hello World
-
-Install the **xaringan** package from [Github](https://github.com/yihui/xaringan):
+# **datos ejemplo: planeta feliz**
 
 
 ```r
-devtools::install_github("yihui/xaringan")
+datos &lt;- read.csv("http://www.lock5stat.com/datasets/HappyPlanetIndex.csv")
+str(datos)
 ```
 
---
-
-You are recommended to use the [RStudio IDE](https://www.rstudio.com/products/rstudio/), but you do not have to.
-
-- Create a new R Markdown document from the menu `File -&gt; New File -&gt; R Markdown -&gt; From Template -&gt; Ninja Presentation`;&lt;sup&gt;1&lt;/sup&gt;
-
---
-
-- Click the `Knit` button to compile it;
-
---
-
-- or use the [RStudio Addin](https://rstudio.github.io/rstudioaddins/)&lt;sup&gt;2&lt;/sup&gt; "Infinite Moon Reader" to live preview the slides (every time you update and save the Rmd document, the slides will be automatically reloaded in RStudio Viewer.
-
-.footnote[
-[1] 中文用户请看[这份教程](http://slides.yihui.name/xaringan/zh-CN.html)
-
-[2] See [#2](https://github.com/yihui/xaringan/issues/2) if you do not see the template or addin in RStudio.
-]
-
----
-background-image: url(https://github.com/yihui/xaringan/releases/download/v0.0.2/karl-moustache.jpg)
-background-position: 50% 50%
-class: center, bottom, inverse
-
-# You only live once!
-
----
-
-# Hello Ninja
-
-As a presentation ninja, you certainly should not be satisfied by the "Hello World" example. You need to understand more about two things:
-
-1. The [remark.js](https://remarkjs.com) library;
-
-1. The **xaringan** package;
-
-Basically **xaringan** injected the chakra of R Markdown (minus Pandoc) into **remark.js**. The slides are rendered by remark.js in the web browser, and the Markdown source needed by remark.js is generated from R Markdown (**knitr**).
-
----
-
-# remark.js
-
-You can see an introduction of remark.js from [its homepage](https://remarkjs.com). You should read the [remark.js Wiki](https://github.com/gnab/remark/wiki) at least once to know how to
-
-- create a new slide (Markdown syntax&lt;sup&gt;*&lt;/sup&gt; and slide properties);
-
-- format a slide (e.g. text alignment);
-
-- configure the slideshow;
-
-- and use the presentation (keyboard shortcuts).
-
-It is important to be familiar with remark.js before you can understand the options in **xaringan**.
-
-.footnote[[*] It is different with Pandoc's Markdown! It is limited but should be enough for presentation purporses. Come on... You do not need a slide for the Table of Contents! Well, the Markdown support in remark.js [may be improved](https://github.com/gnab/remark/issues/142) in the future.]
-
----
-background-image: url(https://github.com/yihui/xaringan/releases/download/v0.0.2/karl-moustache.jpg)
-background-size: cover
-class: center, bottom, inverse
-
-# I was so happy to have discovered remark.js!
-
----
-class: inverse, middle, center
-
-# Using xaringan
-
----
-
-# xaringan
-
-Provides an R Markdown output format `xaringan::moon_reader` as a wrapper for remark.js, and you can use it in the YAML metadata, e.g.
-
-```yaml
----
-title: "A Cool Presentation"
-output:
-  xaringan::moon_reader
-    yolo: true
-    nature:
-      autoplay: 30000
----
+```
+## 'data.frame':	143 obs. of  11 variables:
+##  $ Country       : Factor w/ 143 levels "Albania","Algeria",..: 1 2 3 4 5 6 7 8 9 10 ...
+##  $ Region        : int  7 3 4 1 7 2 2 7 5 7 ...
+##  $ Happiness     : num  5.5 5.6 4.3 7.1 5 7.9 7.8 5.3 5.3 5.8 ...
+##  $ LifeExpectancy: num  76.2 71.7 41.7 74.8 71.7 80.9 79.4 67.1 63.1 68.7 ...
+##  $ Footprint     : num  2.2 1.7 0.9 2.5 1.4 7.8 5 2.2 0.6 3.9 ...
+##  $ HLY           : num  41.7 40.1 17.8 53.4 36.1 63.7 61.9 35.4 33.1 40.1 ...
+##  $ HPI           : num  47.9 51.2 26.8 59 48.3 ...
+##  $ HPIRank       : int  54 40 130 15 48 102 57 85 31 104 ...
+##  $ GDPperCapita  : int  5316 7062 2335 14280 4945 31794 33700 5016 2053 7918 ...
+##  $ HDI           : num  0.801 0.733 0.446 0.869 0.775 0.962 0.948 0.746 0.547 0.804 ...
+##  $ Population    : num  3.15 32.85 16.1 38.75 3.02 ...
 ```
 
-See the help page `?xaringan::moon_reader` for all possible options that you can use.
-
 ---
 
-# remark.js vs xaringan
+Los datos tienen 11 variables:
 
-Some differences between using remark.js (left) and using **xaringan** (right):
-
-.pull-left[
-1. Start with a boilerplate HTML file;
-
-1. Plain Markdown;
-
-1. Write JavaScript to autoplay slides;
-
-1. Manually configure MathJax;
-
-1. Highlight code with `*`;
-
-1. Edit Markdown source and refresh browser to see updated slides;
-]
-
-.pull-right[
-1. Start with an R Markdown document;
-
-1. R Markdown (can embed R/other code chunks);
-
-1. Provide an option `autoplay`;
-
-1. MathJax just works;&lt;sup&gt;*&lt;/sup&gt;
-
-1. Highlight code with `{{}}`;
-
-1. The RStudio addin "Infinite Moon Reader" automatically refreshes slides on changes;
-]
-
-.footnote[[*] Not really. See next page.]
+  - Region: 1 = Latin America, 2 = Western nations, 3 = Middle East, 4 = Sub-Saharan Africa, 5 = South Asia, 6 = East Asia, 7 = former Communist countries
+  - Happiness Scored on a 0-10 scale for average level of happiness (10 is happiest)
+  - LifeExpectancy Average life expectancy (in years)
+  - Footprint Ecological footprint - a measure of the (per capita) ecological impact
+  - HLY Happy Life Years - combines life expectancy with well-being
+  - HPI Happy Planet Index (0-100 scale)
+  - HPIRank HPI rank for the country
+  - GDPperCapita Gross Domestic Product (per capita)
+  - HDI Human Development Index
+  - Population Population (in millions)
 
 ---
-
-# Math Expressions
-
-You can write LaTeX math expressions inside a pair of dollar signs, e.g. &amp;#36;\alpha+\beta$ renders `\(\alpha+\beta\)`. You can use the display style with double dollar signs:
-
-```
-$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$
-```
-
-`$$\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$$`
-
-Limitations:
-
-1. The source code of a LaTeX math expression must be in one line, unless it is inside a pair of double dollar signs, in which case the starting `$$` must appear in the very beginning of a line, followed immediately by a non-space character, and the ending `$$` must be at the end of a line, led by a non-space character;
-
-1. There should not be spaces after the opening `$` or before the closing `$`.
-
-1. Math does not work on the title slide (see [#61](https://github.com/yihui/xaringan/issues/61) for a workaround).
-
----
-
-# R Code
+# **ordenando variables: arrange**
 
 
 ```r
-# a boring regression
-fit = lm(dist ~ 1 + speed, data = cars)
-coef(summary(fit))
+mis_datos %&gt;% arrange(variable)
 ```
 
-```
-#               Estimate Std. Error   t value     Pr(&gt;|t|)
-# (Intercept) -17.579095  6.7584402 -2.601058 1.231882e-02
-# speed         3.932409  0.4155128  9.463990 1.489836e-12
-```
+Orden descendiente:
+
 
 ```r
-dojutsu = c('地爆天星', '天照', '加具土命', '神威', '須佐能乎', '無限月読')
-grep('天', dojutsu, value = TRUE)
+mis_datos %&gt;% arrange(-variable)
+
+mis_datos %&gt;% arrange(desc(variable))
 ```
 
+Para ordenar una variable y luego, la otra:
+
+
+
+```r
+mis_datos %&gt;% arrange(variable_1, variable_2)
 ```
-# [1] "地爆天星" "天照"
+---
+# **ejemplo: arrange**
+
+
+```r
+asc &lt;- datos %&gt;% 
+  arrange(Region)
+```
+
+
+```
+##     Country Region Happiness LifeExpectancy Footprint  HLY   HPI HPIRank
+## 1 Argentina      1       7.1           74.8       2.5 53.4 58.95      15
+## 2    Belize      1       6.6           75.9       2.6 50.2 54.53      27
+## 3   Bolivia      1       6.5           64.7       2.1 42.1 49.35      47
+## 4    Brazil      1       7.6           71.7       2.4 54.3 61.01       9
+## 5     Chile      1       6.3           78.3       3.0 49.2 49.72      46
+## 6  Colombia      1       7.3           72.3       1.8 53.0 66.10       6
+##   GDPperCapita   HDI Population
+## 1        14280 0.869      38.75
+## 2         7109 0.778       0.29
+## 3         2819 0.695       9.18
+## 4         8402 0.800     186.83
+## 5        12027 0.867      16.30
+## 6         7304 0.791      44.95
 ```
 
 ---
 
-# R Plots
+```r
+desc &lt;- datos %&gt;% 
+  arrange(-Region)
+```
+
+
+```
+##                  Country Region Happiness LifeExpectancy Footprint  HLY
+## 1                Albania      7       5.5           76.2       2.2 41.7
+## 2                Armenia      7       5.0           71.7       1.4 36.1
+## 3             Azerbaijan      7       5.3           67.1       2.2 35.4
+## 4                Belarus      7       5.8           68.7       3.9 40.1
+## 5 Bosnia and Herzegovina      7       5.9           74.5       2.9 44.0
+## 6               Bulgaria      7       5.5           72.7       2.7 39.8
+##     HPI HPIRank GDPperCapita   HDI Population
+## 1 47.91      54         5316 0.801       3.15
+## 2 48.28      48         4945 0.775       3.02
+## 3 41.21      85         5016 0.746       8.39
+## 4 35.67     104         7918 0.804       9.78
+## 5 44.96      65         7032 0.803       3.78
+## 6 42.04      82         9032 0.824       7.74
+```
+
+---
+# **escogiendo variables: select**
+
+Se queda con todas las filas pero retiene solo algunas variables (columnas)
 
 
 ```r
-par(mar = c(4, 4, 1, .1))
-plot(cars, pch = 19, col = 'darkgray', las = 1)
-abline(fit, lwd = 2)
+my_data %&gt;% 
+    select(VARIABLE1, VARIABLE2)
 ```
 
-![](slides_files/figure-html/cars-1.svg)&lt;!-- --&gt;
-
----
-
-# Tables
-
-If you want to generate a table, make sure it is in the HTML format (instead of Markdown or other formats), e.g.,
+Elimina variables:
 
 
 ```r
-knitr::kable(head(iris), format = 'html')
+my_data %&gt;% 
+    select(-variable_1, -variable_2)
 ```
 
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:right;"&gt; Sepal.Length &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Sepal.Width &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Petal.Length &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Petal.Width &lt;/th&gt;
-   &lt;th style="text-align:left;"&gt; Species &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4.6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.6 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.2 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.9 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0.4 &lt;/td&gt;
-   &lt;td style="text-align:left;"&gt; setosa &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+---
+# **ejemplo: select**
+
+
+```r
+feliz_chico &lt;- datos %&gt;%
+  select(Country, Region, Happiness)
+```
+
+
+```
+##     Country Region Happiness
+## 1   Albania      7       5.5
+## 2   Algeria      3       5.6
+## 3    Angola      4       4.3
+## 4 Argentina      1       7.1
+## 5   Armenia      7       5.0
+## 6 Australia      2       7.9
+```
 
 ---
+# **enfocándonos en ciertos casos: filter**
 
-# HTML Widgets
 
-I have not thoroughly tested HTML widgets against **xaringan**. Some may work well, and some may not. It is a little tricky.
+```r
+mis_datos %&gt;% filter(una_expresion_logica)
+```
 
-Similarly, the Shiny mode (`runtime: shiny`) does not work. I might get these issues fixed in the future, but these are not of high priority to me. I never turn my presentation into a Shiny app. When I need to demonstrate more complicated examples, I just launch them separately. It is convenient to share slides with other people when they are plain HTML/JS applications.
+Que se cumplan dos condiciones:
 
-See the next page for two HTML widgets.
 
+```r
+mis_datos %&gt;% filter(una_expresion_logica &amp; otra_expresion_logica)
+```
+
+Que se cumpla una u otra condición:
+
+
+```r
+mis_datos %&gt;% filter(una_expresion_logica | otra_expresion_logica)
+```
+---
+# **ejemplo: filter**
+
+
+```r
+feliz2 &lt;- datos %&gt;%
+  filter(Region == 2)
+```
+
+
+```
+##     Country Region Happiness LifeExpectancy Footprint  HLY   HPI HPIRank
+## 1 Australia      2       7.9           80.9       7.8 63.7 36.64     102
+## 2   Austria      2       7.8           79.4       5.0 61.9 47.69      57
+## 3   Belgium      2       7.6           78.8       5.1 60.0 45.36      64
+## 4    Canada      2       8.0           80.3       7.1 64.0 39.40      89
+## 5    Cyprus      2       7.2           79.0       4.5 56.6 46.19      62
+## 6   Denmark      2       8.1           77.9       8.0 62.9 35.47     105
+##   GDPperCapita   HDI Population
+## 1        31794 0.962      20.40
+## 2        33700 0.948       8.23
+## 3        32119 0.946      10.48
+## 4        33375 0.961      32.31
+## 5        22699 0.903       0.76
+## 6        33973 0.949       5.42
+```
 ---
 
 
 ```r
-library(leaflet)
-leaflet() %&gt;% addTiles() %&gt;% setView(-93.65, 42.0285, zoom = 17)
+feliz3 &lt;- datos %&gt;%
+   filter(Happiness &gt; 7)
 ```
 
-<div id="htmlwidget-117f398e6357872a5aa8" style="width:100%;height:432px;" class="leaflet html-widget"></div>
-<script type="application/json" data-for="htmlwidget-117f398e6357872a5aa8">{"x":{"options":{"crs":{"crsClass":"L.CRS.EPSG3857","code":null,"proj4def":null,"projectedBounds":null,"options":{}}},"calls":[{"method":"addTiles","args":["//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",null,null,{"minZoom":0,"maxZoom":18,"tileSize":256,"subdomains":"abc","errorTileUrl":"","tms":false,"noWrap":false,"zoomOffset":0,"zoomReverse":false,"opacity":1,"zIndex":1,"detectRetina":false,"attribution":"&copy; <a href=\"http://openstreetmap.org\">OpenStreetMap<\/a> contributors, <a href=\"http://creativecommons.org/licenses/by-sa/2.0/\">CC-BY-SA<\/a>"}]}],"setView":[[42.0285,-93.65],17,[]]},"evals":[],"jsHooks":[]}</script>
+
+
+```
+##     Country Region Happiness LifeExpectancy Footprint  HLY   HPI HPIRank
+## 1 Argentina      1       7.1           74.8       2.5 53.4 58.95      15
+## 2 Australia      2       7.9           80.9       7.8 63.7 36.64     102
+## 3   Austria      2       7.8           79.4       5.0 61.9 47.69      57
+## 4   Belgium      2       7.6           78.8       5.1 60.0 45.36      64
+## 5    Brazil      1       7.6           71.7       2.4 54.3 61.01       9
+## 6    Canada      2       8.0           80.3       7.1 64.0 39.40      89
+##   GDPperCapita   HDI Population
+## 1        14280 0.869      38.75
+## 2        31794 0.962      20.40
+## 3        33700 0.948       8.23
+## 4        32119 0.946      10.48
+## 5         8402 0.800     186.83
+## 6        33375 0.961      32.31
+```
+---
+
+# **arrange, filter &amp; select**
+
+Recordatorio: arrange, filter &amp; select no alteran el dataset original (mis_datos)
+
+
+```r
+nuevos_datos &lt;- viejos_datos %&gt;%
+    filter(algunas_filas) %&gt;% 
+    select(algunas_columnas) %&gt;% 
+    arrange(por_variable)
+```
+
+Para alterar el dataset original:
+
+
+```r
+viejos_datos &lt;- viejos_datos %&gt;%
+    filter(algunas_filas) %&gt;% 
+    select(algunas_columnas) %&gt;% 
+    arrange(por_variable)
+```
+
+---
+# **creando nuevas variables: mutate**
+
+
+```r
+mis_datos &lt;- mis_datos %&gt;%
+    mutate(variable = expresión)
+```
+
+---
+# **ejemplo: mutate**
+
+
+```r
+feliz &lt;- datos %&gt;%
+  mutate(TotalGDP = GDPperCapita * Population )
+```
+
+
+```
+##     Country Region Happiness LifeExpectancy Footprint  HLY   HPI HPIRank
+## 1   Albania      7       5.5           76.2       2.2 41.7 47.91      54
+## 2   Algeria      3       5.6           71.7       1.7 40.1 51.23      40
+## 3    Angola      4       4.3           41.7       0.9 17.8 26.78     130
+## 4 Argentina      1       7.1           74.8       2.5 53.4 58.95      15
+## 5   Armenia      7       5.0           71.7       1.4 36.1 48.28      48
+## 6 Australia      2       7.9           80.9       7.8 63.7 36.64     102
+##   GDPperCapita   HDI Population TotalGDP
+## 1         5316 0.801       3.15  16745.4
+## 2         7062 0.733      32.85 231986.7
+## 3         2335 0.446      16.10  37593.5
+## 4        14280 0.869      38.75 553350.0
+## 5         4945 0.775       3.02  14933.9
+## 6        31794 0.962      20.40 648597.6
+```
+
+---
+# **renombrando variables: rename**
+
+
+```r
+mis_datos &lt;- mis_datos %&gt;%
+    rename(nuevo_nombre = viejo_nombre)
+```
+
+---
+# **ejemplo: rename**
+
+
+```r
+datos_es &lt;- datos %&gt;%
+  rename(pais = Country,
+         felicidad = Happiness)
+```
+
+
+```
+##        pais Region felicidad LifeExpectancy Footprint  HLY   HPI HPIRank
+## 1   Albania      7       5.5           76.2       2.2 41.7 47.91      54
+## 2   Algeria      3       5.6           71.7       1.7 40.1 51.23      40
+## 3    Angola      4       4.3           41.7       0.9 17.8 26.78     130
+## 4 Argentina      1       7.1           74.8       2.5 53.4 58.95      15
+## 5   Armenia      7       5.0           71.7       1.4 36.1 48.28      48
+## 6 Australia      2       7.9           80.9       7.8 63.7 36.64     102
+##   GDPperCapita   HDI Population
+## 1         5316 0.801       3.15
+## 2         7062 0.733      32.85
+## 3         2335 0.446      16.10
+## 4        14280 0.869      38.75
+## 5         4945 0.775       3.02
+## 6        31794 0.962      20.40
+```
+
+---
+# **resúmenes agrupados: group &amp; summarise**
+
+
+```r
+resumen &lt;- mis_datos %&gt;% 
+  group_by(variable_para_agrupar) %&gt;% 
+  summarise(
+    mediana = median(variable),
+    media = mean(variable),
+    des_est = sd(variable))
+
+resumen
+```
+
+
+```r
+resumen &lt;- mis_datos %&gt;% 
+  group_by(variable_para_agrupar) %&gt;% 
+  summarise(
+    mediana = median(variable, na.rm = T),
+    media = mean(variable, na.rm = T),
+    des_est = sd(variable, na.rm = T))
+
+resumen
+```
 
 ---
 
 
 ```r
-DT::datatable(
-  head(iris, 10),
-  fillContainer = FALSE, options = list(pageLength = 8)
-)
+resumen &lt;- mis_datos %&gt;% 
+  group_by(variable_para_agrupar) %&gt;% 
+  summarise(cuenta = n())
+
+resumen
+```
+---
+
+# **ejemplo: group &amp; summarise**
+
+
+```r
+resumen &lt;- datos %&gt;%
+  group_by(Region) %&gt;%
+  summarise(AverageHappy = mean(Happiness))
+```
+
+
+```
+## # A tibble: 6 x 2
+##   Region AverageHappy
+##    &lt;int&gt;        &lt;dbl&gt;
+## 1      1         6.91
+## 2      2         7.55
+## 3      3         5.99
+## 4      4         4.05
+## 5      5         5.59
+## 6      6         6.32
 ```
 
 ---
+# **en resumen...**
 
-# Some Tips
-
-- When you use the "Infinite Moon Reader" addin in RStudio, your R session will be blocked by default. You can click the red button on the right of the console to stop serving the slides, or use the _daemonized_ mode so that it does not block your R session. To do the latter, you can set the option
-
-    ```r
-    options(servr.daemon = TRUE)
-    ```
+    1) %&gt;%: agiliza el flujo de trabajo
     
-    in your current R session, or in `~/.Rprofile` so that it is applied to all future R sessions. I do the latter by myself.
+    2) arrange: ordena variables
+
+    3) select: elige variables
     
-    To know more about the web server, see the [**servr**](https://github.com/yihui/servr) package.
-
---
-
-- Do not forget to try the `yolo` option of `xaringan::moon_reader`.
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        yolo: true
-    ```
-
----
-
-# Some Tips
-
-- Slides can be automatically played if you set the `autoplay` option under `nature`, e.g. go to the next slide every 30 seconds in a lightning talk:
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          autoplay: 30000
-    ```
-
---
-
-- A countdown timer can be added to every page of the slides using the `countdown` option under `nature`, e.g. if you want to spend one minute on every page when you give the talk, you can set:
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          countdown: 60000
-    ```
-
-    Then you will see a timer counting down from `01:00`, to `00:59`, `00:58`, ... When the time is out, the timer will continue but the time turns red.
-
----
-
-# Some Tips
-
-- There are several ways to build incremental slides. See [this presentation](https://slides.yihui.name/xaringan/incremental.html) for examples.
-
-- The option `highlightLines: true` of `nature` will highlight code lines that start with `*`, or are wrapped in `{{ }}`, or have trailing comments `#&lt;&lt;`;
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          highlightLines: true
-    ```
-
-    See examples on the next page.
-
----
-
-# Some Tips
-
-
-.pull-left[
-An example using a leading `*`:
-
-    ```r
-    if (TRUE) {
-    ** message("Very important!")
-    }
-    ```
-Output:
-```r
-if (TRUE) {
-* message("Very important!")
-}
-```
-
-This is invalid R code, so it is a plain fenced code block that is not executed.
-]
-
-.pull-right[
-An example using `{{}}`:
-
-    ```{r tidy=FALSE}
-    if (TRUE) {
-    *{{ message("Very important!") }}
-    }
-    ```
-Output:
-
-```r
-if (TRUE) {
-* message("Very important!") 
-}
-```
-
-```
-## Very important!
-```
-
-It is valid R code so you can run it. Note that `{{}}` can wrap an R expression of multiple lines.
-]
-
----
-
-# Some Tips
-
-An example of using the trailing comment `#&lt;&lt;` to highlight lines:
-
-````markdown
-```{r tidy=FALSE}
-library(ggplot2)
-ggplot(mtcars) + 
-  aes(mpg, disp) + 
-  geom_point() +   #&lt;&lt;
-  geom_smooth()    #&lt;&lt;
-```
-````
-
-Output:
-
-
-```r
-library(ggplot2)
-ggplot(mtcars) + 
-  aes(mpg, disp) + 
-* geom_point() +
-* geom_smooth()
-```
-
----
-
-# Some Tips
-
-- To make slides work offline, you need to download a copy of remark.js in advance, because **xaringan** uses the online version by default (see the help page `?xaringan::moon_reader`).
-
-- You can use `xaringan::summon_remark()` to download the latest or a specified version of remark.js. By default, it is downloaded to `libs/remark-latest.min.js`.
-
-- Then change the `chakra` option in YAML to point to this file, e.g.
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        chakra: libs/remark-latest.min.js
-    ```
-
-- If you used Google fonts in slides (the default theme uses _Yanone Kaffeesatz_, _Droid Serif_, and _Source Code Pro_), they won't work offline unless you download or install them locally. The Heroku app [google-webfonts-helper](https://google-webfonts-helper.herokuapp.com/fonts) can help you download fonts and generate the necessary CSS.
-
----
-
-# Macros
-
-- remark.js [allows users to define custom macros](https://github.com/yihui/xaringan/issues/80) (JS functions) that can be applied to Markdown text using the syntax `![:macroName arg1 arg2 ...]` or `![macroName](argument)`. For example, before remark.js initializes the slides, you can define a macro named `scale`:
-
-    ```js
-    remark.macros.scale = function (percentage) {
-      var url = this;
-      return '&lt;img src="' + url + '" style="width: ' + percentage + '" /&gt;';
-    };
-    ```
-
-    Then the Markdown text
-
-    ```markdown
-    ![:scale 50%](image.jpg)
-    ```
-
-    will be translated to
+    4) filter: elige filas
     
-    ```html
-    &lt;img src="image.jpg" style="width: 50%" /&gt;
-    ```
-
----
-
-# Macros (continued)
-
-- To insert macros in **xaringan** slides, you can use the option `beforeInit` under the option `nature`, e.g.,
-
-    ```yaml
-    output:
-      xaringan::moon_reader:
-        nature:
-          beforeInit: "macros.js"
-    ```
-
-    You save your remark.js macros in the file `macros.js`.
-
-- The `beforeInit` option can be used to insert arbitrary JS code before `remark.create()`. Inserting macros is just one of its possible applications.
-
----
-
-# CSS
-
-Among all options in `xaringan::moon_reader`, the most challenging but perhaps also the most rewarding one is `css`, because it allows you to customize the appearance of your slides using any CSS rules or hacks you know.
-
-You can see the default CSS file [here](https://github.com/yihui/xaringan/blob/master/inst/rmarkdown/templates/xaringan/resources/default.css). You can completely replace it with your own CSS files, or define new rules to override the default. See the help page `?xaringan::moon_reader` for more information.
-
----
-
-# CSS
-
-For example, suppose you want to change the font for code from the default "Source Code Pro" to "Ubuntu Mono". You can create a CSS file named, say, `ubuntu-mono.css`:
-
-```css
-@import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
-
-.remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
-```
-
-Then set the `css` option in the YAML metadata:
-
-```yaml
-output:
-  xaringan::moon_reader:
-    css: ["default", "ubuntu-mono.css"]
-```
-
-Here I assume `ubuntu-mono.css` is under the same directory as your Rmd.
-
-See [yihui/xaringan#83](https://github.com/yihui/xaringan/issues/83) for an example of using the [Fira Code](https://github.com/tonsky/FiraCode) font, which supports ligatures in program code.
-
----
-
-# Themes
-
-Don't want to learn CSS? Okay, you can use some user-contributed themes. A theme typically consists of two CSS files `foo.css` and `foo-fonts.css`, where `foo` is the theme name. Below are some existing themes:
-
-
-```r
-names(xaringan:::list_css())
-```
-
-```
-## [1] "default-fonts"    "default"          "hygge"           
-## [4] "metropolis-fonts" "metropolis"       "rladies-fonts"   
-## [7] "rladies"
-```
-
-To use a theme, you can specify the `css` option as an array of CSS filenames (without the `.css` extensions), e.g.,
-
-```yaml
-output:
-  xaringan::moon_reader:
-    css: [default, metropolis, metropolis-fonts]
-```
-
-If you want to contribute a theme to **xaringan**, please read [this blog post](https://yihui.name/en/2017/10/xaringan-themes).
-
----
-class: inverse, middle, center
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/3/39/Naruto_Shiki_Fujin.svg)
-background-size: contain
-
-# Naruto
-
----
-background-image: url(https://upload.wikimedia.org/wikipedia/commons/b/be/Sharingan_triple.svg)
-background-size: 100px
-background-position: 90% 8%
-
-# Sharingan
-
-The R package name **xaringan** was derived&lt;sup&gt;1&lt;/sup&gt; from **Sharingan**, a dōjutsu in the Japanese anime _Naruto_ with two abilities:
-
-- the "Eye of Insight"
-
-- the "Eye of Hypnotism"
-
-I think a presentation is basically a way to communicate insights to the audience, and a great presentation may even "hypnotize" the audience.&lt;sup&gt;2,3&lt;/sup&gt;
-
-.footnote[
-[1] In Chinese, the pronounciation of _X_ is _Sh_ /ʃ/ (as in _shrimp_). Now you should have a better idea of how to pronounce my last name _Xie_.
-
-[2] By comparison, bad presentations only put the audience to sleep.
-
-[3] Personally I find that setting background images for slides is a killer feature of remark.js. It is an effective way to bring visual impact into your presentations.
-]
-
----
-
-# Naruto terminology
-
-The **xaringan** package borrowed a few terms from Naruto, such as
-
-- [Sharingan](http://naruto.wikia.com/wiki/Sharingan) (写輪眼; the package name)
-
-- The [moon reader](http://naruto.wikia.com/wiki/Moon_Reader) (月読; an attractive R Markdown output format)
-
-- [Chakra](http://naruto.wikia.com/wiki/Chakra) (查克拉; the path to the remark.js library, which is the power to drive the presentation)
-
-- [Nature transformation](http://naruto.wikia.com/wiki/Nature_Transformation) (性質変化; transform the chakra by setting different options)
-
-- The [infinite moon reader](http://naruto.wikia.com/wiki/Infinite_Tsukuyomi) (無限月読; start a local web server to continuously serve your slides)
-
-- The [summoning technique](http://naruto.wikia.com/wiki/Summoning_Technique) (download remark.js from the web)
-
-You can click the links to know more about them if you want. The jutsu "Moon Reader" may seem a little evil, but that does not mean your slides are evil.
-
----
-
-class: center
-
-# Hand seals (印)
-
-Press `h` or `?` to see the possible ninjutsu you can use in remark.js.
-
-![](https://upload.wikimedia.org/wikipedia/commons/7/7e/Mudra-Naruto-KageBunshin.svg)
-
----
-
-class: center, middle
-
-# Thanks!
-
-Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).
-
-The chakra comes from [remark.js](https://remarkjs.com), [**knitr**](http://yihui.name/knitr), and [R Markdown](https://rmarkdown.rstudio.com).
+    5) mutate: crear nuevas variables
+    
+    6) group_by and summarize: crea resúmenes agrupados
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
