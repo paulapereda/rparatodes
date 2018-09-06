@@ -1,0 +1,34 @@
+---
+title: "rparatodes (2)"
+subtitle: "🌈 el maravilloso mundo de tidyverse 🌈"
+author: "Pau"
+date: "06/09/2018"
+output:
+  xaringan::moon_reader:
+    css: ["default", "rladies", "rladies-fonts"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+# Conceto clave: %>%
+
+El operador %>% funciona así:
+
+f(x) es igual a x %>% f()
+
+```{r, eval = FALSE}
+mis_datos %>% 
+  hace_esta_cosa() %>% 
+  ahora_esta_otra() %>% 
+  y_una_mas()
+```
+
+
+---
