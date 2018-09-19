@@ -1,6 +1,6 @@
 ---
 title: "rparatodes (3)"
-subtitle: "🌈 el maravilloso mundo de tidyverse 🌈"
+subtitle: "📄 leer y reportar datos en R 📄"
 author: "Pau"
 date: "20/09/2018"
 output:
@@ -16,9 +16,11 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 library(tidyverse)
+library(rmarkdown)
 library(readxl)
 library(readr)
 library(haven)
+library(knitr)
 library(here)
 ```
 
@@ -32,6 +34,14 @@ library(here)
 install.packages('here')
 library(here)
 ```
+
+---
+# **¿Cómo leer archivos en R?**
+
+
+
+.center[
+<img src="images/read.png" width="700">]
 
 ---
 # **Leer archivos (1): readr**
@@ -114,6 +124,91 @@ También con estas tres librerías se pueden guardar dataframes como archivos:
 
 - **write_dta**
 
+---
+
+# **¿Qué es R Markdown?**
+
+1) marco unificado para ciencia de datos
+
+2) combina:
+    
+    - código
+    
+    - resultados 
+    
+    - comentarios en prosa 
+  
+3) los documentos R Markdown:
+     
+     - son totalmente reproducibles y automatizables
+     
+     - admiten muchos formatos de salida
+     
+---
+
+class: center, middle    
+
+![](https://rmarkdown.rstudio.com/images/RMarkdownOutputFormats.png)
+
+
+---
+#**Instalar R Markdown**
+
+```{r, eval=FALSE}
+install.packages("rmarkdown")
+install.packages("knitr")
+install.packages("tidyverse")
+
+library(rmarkdown)
+library(knitr)
+library(tidyverse)
+```
+---
+#**Detrás de escenas**
+
+1) Cuando le damos `knit` al documento, R Markdown envía el archivo `.Rmd` a knitr, este ejecuta los fragmentos de código y crea un nuevo documento de formato `.md` que incluye el código y su salida
+
+2) Este archivo generado es luego procesado por `pandoc`, que es responsable de crear el archivo terminado. 
+
+`Ventaja flujo de trabajo de dos pasos:` ¡se puede crear una amplia gama de formatos de salida!
+
+![](http://r4ds.had.co.nz/images/RMarkdownFlow.png)
+---
+
+#**Sintaxis**
+
+- `*cursiva*` y `_cursiva_`
+
+- `**negrita**` y `__negrita__`
+
+- `[link](www.rstudio.com)`
+
+- `# Encabezado 1`
+
+- `## Encabezado 2`
+
+- `### Encabezado 3`
+
+- imagen: `![](camino/a/imagen.png)`
+
+- ` - lista`
+
+---
+#**Código**
+
+    1) Código incrustado: envuelvo el código con contratildes y r, R reemplaza el código 
+    en línea con sus resultados
+   
+    2) Fragmentos de código: comienza un trozo (chunk) con ```{r} y lo termino con ```
+
+
+Opción  | Efecto
+------  | -------------------
+include | ¿Muestra el fragmento de código de R y su resultado?
+echo    | ¿Muestra el fragmento de código de R?
+message | ¿Muestra los mensajes de salida?
+warning | ¿Muestra las advertencias?
+eval    | ¿Evalúa el fragmento de código?
 ---
 class: center, middle
 
