@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>rparatodes (3)</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Pau" />
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies-fonts.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# rparatodes (3)
+## 🌈 el maravilloso mundo de tidyverse 🌈
+### Pau
+### 20/09/2018
+
+---
+
+
+
+
+# **Flujo de trabajo orientado a proyectos**
+
+- organizar cada proyecto como una carpeta en sus computadoras
+
+- usar la función `\(here()\)` para construir una ruta al leer o escribir archivos `\(\rightarrow\)` crea rutas relativas al directorio superior 
+
+
+```r
+install.packages('here')
+library(here)
+```
+
+---
+# **Leer archivos (1): readr**
+
+¡sirve para leer de manera rápida y amigable **datos rectangulares** (como csv, tsv, etc.)!
+
+
+
+```r
+install.packages('readr')
+library(readr)
+```
+
+- **read_csv()**: para leer archivos con coma (“,”) como separador
+ 
+- **read_csv2()**: para leer archivos con punto y coma (“;”) como separador
+ 
+- **read_tsv()**: para leer archivos con tabulador (“\t”) como separador
+
+---
+
+# **ejemplo: readr**
+ 
+
+```r
+csv_mipymes &lt;- read_csv(here('clase_3', 'data', 'mipyme_2016.csv'))
+```
+
+
+```r
+glimpse(csv_mipymes)
+```
+
+```
+## Observations: 174,406
+## Variables: 11
+## $ Nombre_Empresa                &lt;chr&gt; "Bentancur Costabarria Alvaro", ...
+## $ Localidad                     &lt;int&gt; 0, 561, 561, 561, 561, 561, 561,...
+## $ Nombre_Localidad              &lt;chr&gt; "Sin Codificar", "Montevideo", "...
+## $ Departamento                  &lt;int&gt; 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+## $ Nombre_Departamento           &lt;chr&gt; "Sin Codificar", "Montevideo", "...
+## $ Naturaleza_Juridica           &lt;chr&gt; "Empresa Unipersonal", "Empresa ...
+## $ Mpymes                        &lt;chr&gt; "Micro", "Pequeña", "Pequeña", "...
+## $ Seccion                       &lt;chr&gt; "A", "A", "A", "A", "A", "A", "A...
+## $ `Descr. Sección`              &lt;chr&gt; "Producción agropecuaria, forest...
+## $ CIIU                          &lt;dbl&gt; 1629, 3220, 3119, 3119, 3119, 24...
+## $ `Descripcion_CIIU_Revision 4` &lt;chr&gt; "Otros servicios de apoyo a la g...
+```
+---
+# **Leer archivos (2): readxl**
+
+¡hace más sencillo extraer datos de **Excel** y leerlos en R!
+
+
+
+```r
+install.packages('readxl')
+library(readxl)
+```
+
+- **read_xls**: para leer archivos de extensión .xls
+ 
+- **read_xlsx**: para leer archivos de extensión .xlsx
+
+---
+
+# **ejemplo: readxl**
+ 
+
+```r
+xlsx_mipymes &lt;- read_xlsx(here('clase_3', 'data', 'mipyme_2016.xlsx'))
+```
+
+
+```r
+glimpse(xlsx_mipymes)
+```
+
+```
+## Observations: 174,406
+## Variables: 11
+## $ Nombre_Empresa                &lt;chr&gt; "Bentancur Costabarria Alvaro", ...
+## $ Localidad                     &lt;dbl&gt; 0, 561, 561, 561, 561, 561, 561,...
+## $ Nombre_Localidad              &lt;chr&gt; "Sin Codificar", "Montevideo", "...
+## $ Departamento                  &lt;dbl&gt; 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+## $ Nombre_Departamento           &lt;chr&gt; "Sin Codificar", "Montevideo", "...
+## $ Naturaleza_Juridica           &lt;chr&gt; "Empresa Unipersonal", "Empresa ...
+## $ Mpymes                        &lt;chr&gt; "Micro", "Pequeña", "Pequeña", "...
+## $ Seccion                       &lt;chr&gt; "A", "A", "A", "A", "A", "A", "A...
+## $ `Descr. Sección`              &lt;chr&gt; "Producción agropecuaria, forest...
+## $ CIIU                          &lt;dbl&gt; 1629, 3220, 3119, 3119, 3119, 24...
+## $ `Descripcion_CIIU_Revision 4` &lt;chr&gt; "Otros servicios de apoyo a la g...
+```
+---
+# **Leer archivos (3): haven**
+
+¡lee archivos de **SPSS**, **SAS** y **STATA**!
+
+
+
+```r
+install.packages('haven')
+library(haven)
+```
+
+- **read_sav**
+ 
+- **read_spss**
+
+- **read_dta** (también se puede usar **read.dta13** de la librería `\(readstata13\)`)
+
+---
+
+# **escribir archivos**
+ 
+También con estas tres librerías se pueden guardar dataframes como archivos:
+
+- **write_csv**
+
+- **write_dta**
+
+---
+class: center, middle
+
+# **¡Muchas gracias!**
+
+![](https://media.giphy.com/media/q9lNzUPfLAbBK/giphy.gif)
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

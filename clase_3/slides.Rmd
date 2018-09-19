@@ -1,0 +1,122 @@
+---
+title: "rparatodes (3)"
+subtitle: "🌈 el maravilloso mundo de tidyverse 🌈"
+author: "Pau"
+date: "20/09/2018"
+output:
+  xaringan::moon_reader:
+    css: ["default", "rladies", "rladies-fonts"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+library(tidyverse)
+library(readxl)
+library(readr)
+library(haven)
+library(here)
+```
+
+# **Flujo de trabajo orientado a proyectos**
+
+- organizar cada proyecto como una carpeta en sus computadoras
+
+- usar la función $here()$ para construir una ruta al leer o escribir archivos $\rightarrow$ crea rutas relativas al directorio superior 
+
+```{r, eval = FALSE}
+install.packages('here')
+library(here)
+```
+
+---
+# **Leer archivos (1): readr**
+
+¡sirve para leer de manera rápida y amigable **datos rectangulares** (como csv, tsv, etc.)!
+
+
+```{r, eval = FALSE}
+install.packages('readr')
+library(readr)
+```
+
+- **read_csv()**: para leer archivos con coma (“,”) como separador
+ 
+- **read_csv2()**: para leer archivos con punto y coma (“;”) como separador
+ 
+- **read_tsv()**: para leer archivos con tabulador (“\t”) como separador
+
+---
+
+# **ejemplo: readr**
+ 
+```{r, results = 'hide', message = F}
+csv_mipymes <- read_csv(here('clase_3', 'data', 'mipyme_2016.csv'))
+```
+
+```{r}
+glimpse(csv_mipymes)
+```
+---
+# **Leer archivos (2): readxl**
+
+¡hace más sencillo extraer datos de **Excel** y leerlos en R!
+
+
+```{r, eval = FALSE}
+install.packages('readxl')
+library(readxl)
+```
+
+- **read_xls**: para leer archivos de extensión .xls
+ 
+- **read_xlsx**: para leer archivos de extensión .xlsx
+
+---
+
+# **ejemplo: readxl**
+ 
+```{r, results = 'hide', message = F}
+xlsx_mipymes <- read_xlsx(here('clase_3', 'data', 'mipyme_2016.xlsx'))
+```
+
+```{r}
+glimpse(xlsx_mipymes)
+```
+---
+# **Leer archivos (3): haven**
+
+¡lee archivos de **SPSS**, **SAS** y **STATA**!
+
+
+```{r, eval = FALSE}
+install.packages('haven')
+library(haven)
+```
+
+- **read_sav**
+ 
+- **read_spss**
+
+- **read_dta** (también se puede usar **read.dta13** de la librería $readstata13$)
+
+---
+
+# **escribir archivos**
+ 
+También con estas tres librerías se pueden guardar dataframes como archivos:
+
+- **write_csv**
+
+- **write_dta**
+
+---
+class: center, middle
+
+# **¡Muchas gracias!**
+
+![](https://media.giphy.com/media/q9lNzUPfLAbBK/giphy.gif)
