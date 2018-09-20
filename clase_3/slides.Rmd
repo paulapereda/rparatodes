@@ -32,9 +32,22 @@ library(here)
 <img src="images/project.png" width="700">]
 
 ---
-- usar la función $here()$ para construir una ruta al leer o escribir archivos $\rightarrow$ crea rutas relativas al directorio superior 
+# **Rutas**
 
-```{r, eval = FALSE}
+`/home/databases/zzff` es una ruta para llegar a un directorio (como en el navegador de Windows)
+
+
+R siempre tiene un directorio "actual" de trabajo
+
+```{r}
+getwd()
+```
+
+Tenemos acceso a los archivos que estan en el directorio actual, o podemos especificar una ruta desde el directorio actual hacia donde esta el archivo que queremos
+
+.
+---
+- usar la función $here()$ para construir una ruta al leer o escribir archivos $\rightarrow$ crea rutas relativas al directorio sudel proyecto```{r, eval = FALSE}
 install.packages('here')
 library(here)
 ```
