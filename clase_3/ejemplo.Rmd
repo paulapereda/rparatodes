@@ -1,0 +1,58 @@
+---
+title: "Ejemplo"
+author: "Paula Pereda"
+date: "20/9/2018"
+output:
+  word_document:
+    reference_docx: estilo_tu.docx
+---
+
+#Paso 1: cargar librarías
+
+```{r, message=FALSE}
+library(tidyverse)
+library(readxl)
+library(knitr)
+library(here)
+```
+
+#Paso 2: leo los datos y los exploro
+
+```{r}
+datos <- read_xlsx(here('clase_3', 'data', 'mipyme_2016.xlsx')) %>% 
+  mutate(Mpymes = str_to_title(Mpymes))
+
+glimpse(datos)
+```
+
+#Características de la base
+
+- `r nrow(datos)` filas 
+
+- `r ncol(datos)` columnas
+
+- Nombre variables: `r names(datos)`
+
+#Empresas por departamento
+
+```{r}
+n_depto <- datos %>% 
+  filter(Nombre_Departamento != "Sin Codificar") %>% 
+  group_by(Nombre_Departamento) %>% 
+  count %>% 
+  arrange(n)
+
+kable(n_depto, caption = "Cantidad de empresas por departamento")
+```
+
+#Empresas por departamento
+
+```{r}
+tamanio_depto <- datos %>% 
+  filter(Nombre_Departamento != "Sin Codificar") %>% 
+  group_by(Nombre_Departamento, Mpymes) %>% 
+  count %>% 
+  spread(Mpymes, n)
+
+kable(tamanio_depto, caption = "Cantidad de empresas por departamento y tamaño")
+```

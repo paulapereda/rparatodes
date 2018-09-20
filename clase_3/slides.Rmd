@@ -213,6 +213,15 @@ echo    | ¿Muestra el fragmento de código de R?
 message | ¿Muestra los mensajes de salida?
 warning | ¿Muestra las advertencias?
 eval    | ¿Evalúa el fragmento de código?
+
+---
+# **¡Hagamos!**
+
+.center[
+<img src="images/open_rmarkdown.png" width="700">]
+---
+.center[
+<img src="images/format_rmarkdown.png" width="700">]
 ---
 class: center, middle
 
