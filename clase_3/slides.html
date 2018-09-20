@@ -30,7 +30,8 @@ class: center, middle, inverse, title-slide
 &lt;img src="images/project.png" width="700"&gt;]
 
 ---
-- # **Rutas**
+
+# **Rutas**
 
 `/home/databases/zzff` es una ruta para llegar a un directorio (como en el navegador de Windows)
 
@@ -43,12 +44,14 @@ getwd()
 ```
 
 ```
-## [1] "/home/rlabuonora/rparatodes/clase_3"
+## [1] "/Users/paulapereda/rparatodes/clase_3"
 ```
 
+Tenemos acceso a los archivos que estan en el directorio actual, o podemos especificar una ruta desde el directorio actual hacia donde esta el archivo que queremos
 
 ---
-usar la función `\(here()\)` para construir una ruta al leer o escribir archivos `\(\rightarrow\)` crea rutas relativas al directorio superior 
+
+- usar la función `\(here()\)` para construir una ruta al leer o escribir archivos `\(\rightarrow\)` crea rutas relativas al directorio sudel proyecto
 
 
 ```r
@@ -302,23 +305,12 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   d.head.appendChild(s);
 })();</script>
 
-<script>
-(function() {
-  var i, text, code, codes = document.getElementsByTagName('code');
-  for (i = 0; i < codes.length;) {
-    code = codes[i];
-    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
-      text = code.textContent;
-      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
-          /^\$\$(.|\s)+\$\$$/.test(text) ||
-          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
-        code.outerHTML = code.innerHTML;  // remove <code></code>
-        continue;
-      }
-    }
-    i++;
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
   }
-})();
+});
 </script>
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
