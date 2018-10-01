@@ -1,0 +1,101 @@
+---
+title: "rparatodes (4)"
+subtitle: "Taller Rmarkdown"
+author: "Pau"
+date: "04/10/2018"
+output:
+  xaringan::moon_reader:
+    css: ["default", "rladies", "rladies-fonts"]
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+# **¿Qué es Rmarkdown?**
+
+- **archivos .Rmd $\rightarrow$ registro de tu trabajo**: el código que necesitamos para reproducir el trabajo + la narración que un lector necesitaría para entenderlo
+ 
+- **reproducibilidad**:cliqueando un botón, se puede reproducir el trabajo y exportar los resultados como un informe finalizado
+
+- **documentos dinámicos**: se puede elegir exportar los informes finalizados en una variedad de formatos como html, pdf, word, etc.
+
+
+--- 
+
+
+![](https://rmarkdown.rstudio.com/images/RMarkdownOutputFormats.png)
+
+---
+
+
+# **Flujo de trabajo**
+
+1) **Abrir un nuevo archivo .Rmd** en  `File -> New File -> R Markdown`
+
+2) **Escribir el documento**
+
+3) **Knit al documento para crear el informe** utilizando el botón `Knit`
+
+4) ¡Obtengo mi informe!
+
+---
+
+# **Encabezado YAML**
+
+- Brinda **información básica** sobre el documento: título, fecha, autor, formato
+
+- RStudio lo inserta por nosotros
+
+- Opciones de formato de salida:
+
+Valor Output                  | Formato de salida
+----------------------------  | -------------------
+output: html_document	        | archivo html (página web)
+output: pdf_document	        | documento pdf
+output: word_document	        | Microsoft Word .docx
+output: beamer_presentation   |	presentación beamer (pdf)
+output: ioslides_presentation |	presentación ioslides (html)
+
+- Además puedo agregar: plantilla de estilo, índice, etc.
+
+---
+
+# **Sintaxis** 
+
+- `*cursiva*` y `_cursiva_`
+
+- `**negrita**` y `__negrita__`
+
+- `[link](www.rstudio.com)`
+
+- `# Encabezado 1`
+
+- `## Encabezado 2`
+
+- `### Encabezado 3`
+
+- imagen: `![](camino/a/imagen.png)`
+
+- ` - lista`
+
+---
+
+# **Incluyendo código**
+
+1) **Códido en línea**: inserto r <código>: los resultados aparecen como texto sin código
+
+2) **Fragmentos de código**: una o más líneas de código encerrados por ```{r} y ```
+
+Opción  | Efecto
+------  | -------------------
+include | ¿Muestra el fragmento de código de R y su resultado?
+echo    | ¿Muestra el fragmento de código de R?
+message | ¿Muestra los mensajes de salida?
+warning | ¿Muestra las advertencias?
+eval    | ¿Evalúa el fragmento de código?
