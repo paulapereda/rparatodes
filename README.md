@@ -5,3 +5,5 @@
 
 + [*Taller 2: intro al tidyverse*](https://github.com/paupereda/rparatodes/blob/master/clase_2/slides_2.pdf) (basado los siguientes tutoriales: 
 [R-Ladies little miss tidyverse](https://slides.com/djnavarro/tidyverse-for-beginners) y [R-Ladies data wrangling](https://github.com/melcrow/RLadies/blob/master/Data_Wrangling.md))
+
++ [*Taller 3: buenas prácticas y Rmarkdown*](https://github.com/paupereda/rparatodes/blob/master/clase_3/slides_3.pdf)
