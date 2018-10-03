@@ -51,6 +51,10 @@ class: center, middle, inverse, title-slide
 4) ¡Obtengo mi informe!
 
 ---
+# **Estructura**
+
+![](images/estructura.png)
+---
 
 # **Encabezado YAML**
 
@@ -86,7 +90,7 @@ output: ioslides_presentation |	presentación ioslides (html)
 
 - `### Encabezado 3`
 
-- imagen: `![](camino/a/imagen.png)`
+- imagen: `![Títuo](camino/a/imagen.png)`
 
 - ` - lista`
 
@@ -94,9 +98,14 @@ output: ioslides_presentation |	presentación ioslides (html)
 
 # **Incluyendo código**
 
-1) **Códido en línea**: inserto r &lt;código&gt;: los resultados aparecen como texto sin código
+     1) Códido en línea: los resultados aparecen como texto sin código, lo comienzo 
+     con ` r y finalizo con `
 
-2) **Fragmentos de código**: una o más líneas de código encerrados por ```{r} y ```
+     2) Fragmentos de código: comienza un trozo (chunk) con ```{r} y lo termino con ```
+
+&lt;img src="images/chunk.png" width="50%" /&gt;
+
+---
 
 Opción  | Efecto
 ------  | -------------------
