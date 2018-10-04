@@ -6,7 +6,7 @@ date: "Fecha"
 output: html_document
 ---
  
-Cargando librerías
+# Cargando librerías
 
 ```{r}
 library(tidyverse)
