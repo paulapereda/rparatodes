@@ -1,6 +1,6 @@
 ---
 title: "rparatodes (4)"
-subtitle: "Taller Rmarkdown"
+subtitle: "🎉 Taller Rmarkdown 🎉"
 author: "Pau"
 date: "04/10/2018"
 output:
@@ -26,7 +26,9 @@ options(htmltools.dir.version = FALSE)
 - **documentos dinámicos**: se puede elegir exportar los informes finalizados en una variedad de formatos como html, pdf, word, etc.
 
 
---- 
+---
+
+class: center, middle
 
 
 ![](https://rmarkdown.rstudio.com/images/RMarkdownOutputFormats.png)
@@ -103,6 +105,9 @@ knitr::include_graphics('images/chunk.png')
 
 ---
 
+class: center, middle
+
+
 Opción  | Efecto
 ------  | -------------------
 include | ¿Muestra el fragmento de código de R y su resultado?
@@ -110,3 +115,40 @@ echo    | ¿Muestra el fragmento de código de R?
 message | ¿Muestra los mensajes de salida?
 warning | ¿Muestra las advertencias?
 eval    | ¿Evalúa el fragmento de código?
+
+---
+# **Ejercicios**
+
+    1) Convertir las líneas 8, 17, 32, 47, 62, 77 en encabezados principales (títulos)
+    
+    2) Convertir las líneas 21 y 26 en encabezados secundarios (subtítulos)
+    
+    3) Insertarle el siguiente link http://www.ine.gub.uy/encuesta-continua-de-hogares1 
+    a la frase "Encuesta Continua de Hogares" en la línea 19
+    
+    4) Convertir el rango de líneas 28-30 en una lista
+    
+    5) Recordando que las funciones `names`, `nrow` y `ncol` nos brindan los nombres, 
+    el número de filas y columnas de un set de datos, respectivamente, agregar código 
+    en línea a la lista creada en el inciso anterior
+    
+    6) Mostrar los nombres de los departamentos en negrita
+    
+    7) Quitar los mensajes que genera el cargar las librerías en la línea 11
+    
+    8) Ocultar los códigos que generan tablas y dataframes 
+    
+    9) Con la función `kable` del paquete `kableExtra` puedo crear tablas, 
+    agregue un título a la tabla generada en la línea 89
+    
+    10) Cambiarle el parámetro del `output` para que el formato de salida sea un 
+    documento de Word
+    
+    
+
+---
+class: center, middle
+
+# **¡Muchas gracias y a usar Rmarkdown!**
+
+![](https://media.giphy.com/media/10UeedrT5MIfPG/giphy.gif)

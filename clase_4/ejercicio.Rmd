@@ -1,0 +1,91 @@
+---
+title: "Anlizando los datos de trabajadores independientes en la ECH 2017"
+subtitle: "RMarkdown"
+author: "Nombre"
+date: "Fecha"
+output: html_document
+---
+ 
+Cargando librerías
+
+```{r}
+library(tidyverse)
+library(readr)
+library(kableExtra)
+```
+
+Fuente de datos
+
+Estos datos fueron construidos a partir de la Encuesta Continua de Hogares.  
+
+Importación de los datos 
+
+```{r}
+datos <- read_csv('data/datos.csv')
+```
+Características de los datos
+
+Nombres de las variables:
+Número de filas:
+Número de columnas:
+
+¿Cuántas empresas no tributan del total de empresas?
+
+```{r}
+datos %>% 
+  filter(departamento != "Total") %>% 
+ggplot(aes(reorder(departamento, no_tributa_total_empresas), no_tributa_total_empresas)) +
+  geom_point() +
+  coord_flip() +
+  xlab('Departamento') +
+  ylab('Porcentaje de empresas que no tributan') +
+  theme_minimal()
+```
+
+El departamento que tiene el menor porcentaje de empresas que no tributan es Colonia y el que tiene el mayor porcentaje de empresas que no tributan es Cerro Largo.
+
+¿Cuántas empresas tributan por Régimen General?
+
+```{r}
+datos %>% 
+  filter(departamento != "Total") %>% 
+ggplot(aes(reorder(departamento, regimen_general_total_empresas), regimen_general_total_empresas)) +
+  geom_point() +
+  coord_flip() +
+  xlab('Departamento') +
+  ylab('Porcentaje de empresas que tributan por Régimen General') +
+  theme_minimal()
+```
+
+El departamento que tiene menor número de empresas que tributan por Régimen General es Cerro Largo y el que tiene mayor número de estas empresas es Durazno.
+
+¿Cuántas empresas hay cada 1000 habitantes?
+
+```{r}
+datos %>% 
+  filter(departamento != "Total") %>% 
+ggplot(aes(reorder(departamento, empresas_cada_1000_habitantes), empresas_cada_1000_habitantes)) +
+  geom_point() +
+  coord_flip() +
+  xlab('Departamento') +
+  ylab('Empresas cada 1000 habitantes') +
+  theme_minimal()
+```
+
+El departamento que tiene un mayor número de empresas cada mil habitantes es Colonia y el que tiene el menor número es Tacuarembó.
+
+En resumen... 
+
+```{r}
+resumen <- datos %>% 
+  select(-na, -no_tributa_total_empresas, 
+         -regimen_general_total_empresas, 
+         - poblacion_total, 
+         -empresas_cada_1000_habitantes,
+         -no_tributa,
+         -otra_forma_de_tributacion)
+```
+
+```{r}
+kable(resumen, caption = "")
+```
