@@ -8,4 +8,4 @@
 
 + [*Taller 3: buenas prácticas, leer y reportar datos en Rmarkdown*](https://github.com/paulapereda/rparatodes/blob/master/clase_3/slides_3.pdf)
 
-+ [*Taller 4: RMarkdown workshop*](https://github.com/paulapereda/rparatodes/blob/master/clase_4/slides.pdf)
++ [*Taller 4: R Markdown workshop*](https://github.com/paulapereda/rparatodes/blob/master/clase_4/slides.pdf)
